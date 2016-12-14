@@ -1,18 +1,21 @@
 var http = require("http");
-var fs = require("fs");
 var url = require("url");
 
-http.createServer(function (request, response) {
+function start(route, handle) {
 	
-	var fullPath = url.parse(request.url, true);
-	var pathArr = fullPath.pathname.split(".");
+	function onRequest(request, response) {
+	var pathname = url.parse(request.url).pathname;
+	console.log("Request for" + pathname + "received.");
 	
-	fs.readFile("./public" + fullPath.pathname, "utf8", function(err, data) {
-		if (err) {
-			response.writeHead(404, {"Content-Type": "text/plain"});
-			response.end("The page you found does not exist.");
-		}
-		response.end(data);	
-	});
-	
-}).listen(3003);
+	route(handle, pathname, response);
+	}
+
+	http.createServer(onRequest).listen(4321);
+	console.log("Server has started.");
+}
+
+exports.start = start;
+
+
+
+
