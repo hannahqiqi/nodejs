@@ -12,20 +12,25 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.set('views', './views')
 app.set('view engine', 'pug')
 
-app.get('/', function(req, res) {
-    
-      res.render('post')
-    })
- 
+app.get('/', function (req, res) {
+    MongoClient.connect(url, function (err, db) {
+        var collection = db.collection('post')
 
-app.post('/blog', function(req, res) {
-    MongoClient.connect(url, function(err, db) {
+        collection.find().toArray(function (err, docs) {
+            db.close()
+            res.render('post', { posts: docs })
+        })
+    })
+})
+
+app.post('/blog', function (req, res) {
+    MongoClient.connect(url, function (err, db) {
         console.log('connected')
         var collection = db.collection('post')
-        collection.insertOne({post:req.body.comment}, function(err) {
-            collection.find().toArray(function(err, docs) {
+        collection.insertOne({ post: req.body.comment }, function (err) {
+            collection.find().toArray(function (err, docs) {
                 db.close()
-                res.render('post', {posts: docs})
+                res.render('post', { posts: docs })
             })
         })
     })
