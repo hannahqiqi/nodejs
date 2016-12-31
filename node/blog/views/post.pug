@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+  head
+    title post
+  body
+    h1 Blog
+    form(action='/blog' method='post')
+      p
+        textarea(type='textarea' name='comment' cols='80' rows='8')
+      p
+        input(type='submit' value='Submit')
+      if posts
+        ul
+          each val in posts
+            li= val.post
