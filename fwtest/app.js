@@ -14,6 +14,6 @@ app.get("/welcome", function (req, res) {
 });
 
 app.post("/login", function(req, res) {
-	res.sendFile(__dirname + '/public/balabala.html');
+	res.sendFile(__dirname + '/public/succ.html');
 });
 app.listen(3006);
