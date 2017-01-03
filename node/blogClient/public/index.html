@@ -1,14 +1,22 @@
 <html>
-	<head>
-		<title>Blog</title>
-		<script src="lib/jquery-3.1.1.min.js"></script>
-		<script src="js/index.js"></script>
-	</head>
-	<body>
-		<div>
-			<textarea name="post" id="post" cols="80" rows="8" placeholder="说点什么吧..."></textarea>
-		</div>
-		<p><button type='button' onclick="addPost()">提交</button></p>
-		<ul id="blogs"></ul>
-	</body>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <title>Blog</title>
+  <script src="lib/jquery-3.1.1.min.js"></script>
+  <script src="lib/locale/zh-cn.js"></script>
+  <script src="lib/moment.min.js"></script>
+  <script src="js/index.js"></script>
+</head>
+
+<body>
+  <div>
+    <textarea name="post" id="post" cols="80" rows="8" placeholder="说点什么吧..."></textarea>
+  </div>
+  <p>
+    <button class="btn btn-primary btn-sm" type='button' onclick="addPost()">提交</button>
+  </p>
+  <ul id="blogs"></ul>
+</body>
+
 </html>
