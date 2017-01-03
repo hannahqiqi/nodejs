@@ -24,7 +24,7 @@ app.post('/blog', function(req, res) {
     var post = req.body.post
     MongoClient.connect(url, function(err, db) {
         var collection = db.collection('post')
-        collection.insertOne({post: post}, function() {
+        collection.insert({post: post, postTime: Date()}, function() {
             db.close()
             res.send('ok')
         })
