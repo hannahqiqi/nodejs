@@ -18,10 +18,25 @@ function loadPost() {
 	$.get("http://localhost:2000/blogs", function(data) {
 		var html = ""
 		for (var item of data) {
-
-			let localTime = moment(item.postTime).format('YYYY-MM-DD HH:mm')
-			html += `<li>${item.post}&nbsp;${localTime}</li>`
+			var localTime = moment(item.postTime).format('YYYY-MM-DD HH:mm')
+			html += `<li>${item.post}&nbsp;${localTime} <a href='javascript:void(0);' onclick="delPost('${item._id}')">删除</a></li>`
 		}
 		$("#blogs").html(html)
+	})
+}
+
+function delPost(postId) {
+
+	$.get('http://localhost:2000/delblog', {id: postId}, function(data) {
+		 var post = $("#post").val()
+		 $("#post").val("")
+		 loadPost()
+	})
+}
+
+function searchPost() {
+	$.get("http://localhost:2000/searchblog", function(data) {
+		 var post = $("#post").val()
+		 loadPost()
 	})
 }
