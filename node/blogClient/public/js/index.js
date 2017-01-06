@@ -36,5 +36,11 @@ function searchPost() {
   console.log(content)
   $.get("http://localhost:2000/searchblog", { dta: content }, function(data) {
     console.log(data)
+    var html = ""
+    for (var item of data) {
+      var localTime = moment(item.postTime).format('YYYY-MM-DD HH:mm')
+      html +=  `<li>${item.post}&nbsp;${localTime} <button type="button" class="btn btn-default" style="border:none" onclick="delPost('${item._id}')">删除</button></li>`
+      $("#blogs").html(html)
+    }
   })
 }
